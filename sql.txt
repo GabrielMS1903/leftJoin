@@ -1,0 +1,23 @@
+CREATE TABLE clientes (
+    id  SERIAL primary KEY, 
+    nome VARCHAR(100),
+    email VARCHAR(100)
+);
+
+CREATE TABLE pedidos (
+    id  SERIAL primary KEY, 
+    produto VARCHAR(100),
+    recheio VARCHAR(100),
+    cliente_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+); 
+
+INSERT INTO clientes(nome, email) VALUES('Antony', 'anty@gmail.com'), 
+('Marta', 'marti11@gmail.com');
+
+INSERT INTO pedidos(produto, recheio) VALUES('Bolo', 'Morango e amendoim'), 
+('Torta', 'frango com milho');
+
+SELECT clientes.nome, pedidos.produto, pedidos.recheio
+FROM clientes
+LEFT JOIN pedidos ON clientes.id = pedidos.cliente_id
